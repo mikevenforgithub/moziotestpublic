@@ -1,2 +1,2 @@
 heroku run rails console 
-web: gunicorn mozio.wsgi --log-file -
+web: gunicorn MOZIOTEST.wsgi --log-file -
