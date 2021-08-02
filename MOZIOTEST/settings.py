@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mozio.urls'
+ROOT_URLCONF = 'MOZIOTEST.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mozio.wsgi.application'
+WSGI_APPLICATION = 'MOZIOTEST.wsgi.application'
 
 
 # Database
