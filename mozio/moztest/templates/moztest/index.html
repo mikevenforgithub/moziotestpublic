@@ -1,0 +1,185 @@
+{% extends "moztest/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+{% endblock %}
+{% block body %}
+<body>
+
+<div class="main">
+    <div class="title">
+          <div class="nameofproject">
+              BACKEND/PYTHON CODING PROJECT 2.0
+          </div>
+          <div class="nav">
+          </div>
+    </div>
+    <div class="main-int">
+        <div class="titles">
+            <div class="provtitle"></div>
+            <div class="maptitle"></div>
+        </div>
+        <div class="panels">
+            <div class="singlepanel">
+                <div id="mapid"></div>
+            </div>
+        </div>
+    </div>
+    <div class="main-int" style="white-space: nowrap;">
+        <div class="panels">
+            <div class="leftpanel">
+                <div id="providerslist" id="providerslist">
+                    {% for provider in providers%}
+                    <div id="singleprovider{{provider.id}}">
+                        <hr>
+                        <div id="namecontainer{{provider.id}}">
+                            <h2 id="providername{{provider.id}}">{{provider.Name}}</h2>
+                        </div>
+                        <br>
+                        <div id="emailcontainer{{provider.id}}">
+                            <h3 id="provideremail{{provider.id}}">{{provider.Email}}</h2>
+                        </div>
+                        <div id="phonecontainer{{provider.id}}">
+                            <h3 id="providerphone{{provider.id}}">{{provider.Phonenumber}}</h2>
+                        </div>  
+                        <div id="languagecontainer{{provider.id}}">
+                            <h3 id="providerlanguage{{provider.id}}">{{provider.Language}}</h2>
+                        </div> 
+                        <div id="currencycontainer{{provider.id}}">
+                            <h3 id="providercurrency{{provider.id}}">{{provider.Currency}}</h2>
+                        </div>
+                        <br>
+                        <div id="buttonscontainer{{provider.id}}">
+                                <button class="editbutton" id="editprovider{{provider.id}}" onclick="edit_provider('{{ provider.id }}')">EDIT</button>
+                                <button id="deleteprovider{{provider.id}}" onclick="del_provider('{{ provider.id }}')">DELETE</button>
+                        </div>
+                        <hr>
+                    </div>
+                     {% endfor %}
+                </div>
+            </div>
+            <div class="middle"></div>
+            <div class="rightpanel">
+                <div id="areaslist" id="areaslist">
+                    {% for area in areas %}
+                    <div id="singlearea{{area.id}}">
+                        <hr>
+                        <br>
+                        <div id="provcontainer{{area.id}}">
+                            <h3 id="areaprovider{{area.id}}">{{area.provider}}</h2>
+                        </div>
+                        <div id="colorcontainer{{area.id}}">  
+                            <h3 id="areacolor{{area.id}}">{{area.color}}</h2>
+                        </div> 
+                        <div id="nameofareacontainer{{area.id}}">
+                            <h3 id="areanameofarea{{area.id}}">{{area.nameofarea}}</h2>
+                        </div>
+                        <div id="pricecontainer{{area.id}}">
+                            <h3 id="areaprice{{area.id}}">{{area.price}}</h2>
+                        </div>
+                        <div id="coordscontainer{{area.id}}">
+                            <h3 id="areacoords{{area.id}}" style="white-space: wrap;">{{area.coords}}</h2>
+                        </div>
+                        <br>
+                        <div id="buttonscontainerar{{area.id}}">
+                                <button class="editbutton" id="editarea{{area.id}}" onclick="edit_area('{{ area.id }}')">EDIT</button>
+                                <button id="deletearea{{area.id}}" onclick="del_area('{{ area.id }}')">DELETE</button>
+                        </div>
+                        <hr>
+                    </div>
+                     {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="third-int">
+            <div class="panels">
+                    <div class="createprovider">
+                        <h3>New Provider</h3>
+                        <form id="compose-form"  >
+                            <textarea class="form-control" id="compose-name" placeholder="Name"></textarea>
+                            <textarea class="form-control" id="compose-email" placeholder="Email"></textarea>
+                            <textarea class="form-control" id="compose-phone" placeholder="Phone"></textarea>
+                            <textarea class="form-control" id="compose-language" placeholder="Language"></textarea>
+                            <textarea class="form-control" id="compose-currency" placeholder="Currency"></textarea>
+                            <input id="inputbutton" type="submit" id="sendit" onclick="save_provider()" class="btn btn-primary"/>
+                        </form>
+                    </div>
+                    <div class="middle"></div>
+                    <div class="createarea" >
+                        <h3>New Area</h3>
+                        <form id="compose-form2" enctype='text/plain'>
+                            <textarea class="form-control" id="compose-provider" placeholder="Provider"></textarea>
+                            <textarea class="form-control" id="compose-color" placeholder="Color"></textarea>
+                            <textarea class="form-control" id="compose-nameofarea" placeholder="Name of Area"></textarea>
+                            <textarea class="form-control" id="compose-price" placeholder="Price"></textarea>
+                            <br>
+                            <textarea  class="form-control" id="compose-coords" placeholder="Coordinates"></textarea>
+                            <input id="inputbutton" type="submit" id="sendit" onclick="save_area()" class="btn btn-primary"/>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'moztest/index.js' %}"></script>
+<script src="{% static 'moztest/map.js' %}"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script>
+
+
+
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+maxZoom: 18,
+id: 'mapbox/streets-v11',
+tileSize: 512,
+zoomOffset: -1,
+accessToken: 'pk.eyJ1IjoibWlrZXZlbiIsImEiOiJja3JneGRsZmkwZTR6MnZwZ3J2NnR0NXNiIn0.bGpB2GRtZtVjYjYx5GsSZA'
+}).addTo(mymap);
+
+L.Control.geocoder().addTo(mymap);
+
+fetch('/areas')
+.then(response => response.json())
+.then(areas => {
+    console.log(areas);
+    for (area in areas){
+
+    var co = areas[area]['coords'];
+    var prov = areas[area]['provider'];
+    var price = areas[area]['price'];
+    var noa = areas[area]['nameofarea'];
+    var col = areas[area]['color'];
+    console.log(co);
+
+    var provider = L.geoJSON(co , {
+        color: `${col}`,
+        fillColor: `${col}`,
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(mymap);
+
+    provider.bindPopup(`<b>${prov}</b><br>Price:${price}<br>${noa}`).openPopup();
+
+    }
+
+  });
+
+
+
+</script>
+
+</body>
+
+{% endblock %}
+

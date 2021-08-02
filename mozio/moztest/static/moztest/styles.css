@@ -1,0 +1,143 @@
+.main{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.81);
+    min-width: 1000px;
+
+}
+
+.main-int{
+    
+    height: 700px;
+    background-color: rgb(252, 54, 54);
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 1000px;
+    
+}
+
+.panels{
+     
+    margin-left: 10%;
+    min-width: 1000px;
+    
+
+}
+
+
+.leftpanel{
+    
+    height:600px;
+    width: 600px;
+    background-color: rgb(235, 181, 235);
+    display: inline-block;
+    margin-bottom: auto;
+    overflow: auto;
+
+}
+
+.middle{
+
+    height:auto;
+    width: 100px;
+    background-color: rgb(214, 235, 181);
+    display: inline-block;
+    
+}
+
+
+.rightpanel{
+    
+    height:600px;
+    width: 700px;
+    background-color: rgb(94, 81, 244);
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow: auto;
+    
+}
+
+#mapid { 
+
+    height: 600px; 
+    width: 1400px;
+}
+
+
+
+.title{
+    height: 180px;
+    width: 100%;
+    background-color: teal;
+}
+
+.nameofproject{
+
+    height: 80px;
+    width: 50%;
+    background-color: rgb(0, 79, 128);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: snow;
+}
+
+.sec-int{
+    
+    height: 700px;
+    background-color: rgb(252, 54, 54);
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.third-int{
+    
+    height: 700px;
+    background-color: rgb(80, 54, 252);
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#compose-coords{
+    width: 730px;
+    height: 400px;
+    overflow: auto;
+}
+
+.createprovider{
+    height:150px;
+    width: 1400px;
+    background-color: rgb(235, 181, 235);
+    margin-bottom: auto;
+    overflow: auto;
+    align-items: center;
+    
+    
+   
+}
+
+.createarea{
+    height:520px;
+    width: 1400px;
+    background-color: rgb(247, 233, 81);
+    margin-bottom: auto;
+    overflow: auto;
+    
+}
+
+.fourth-int{
+
+    height: 700px;
+    background-color: rgb(80, 54, 252);
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
